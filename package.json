@@ -1,0 +1,21 @@
+{
+  "name": "unr",
+  "version": "1.0.0",
+  "description": "A javascript terminal.",
+  "main": "unr.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "unr",
+    "terminal"
+  ],
+  "author": "Berserker",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "sha1": "^1.1.1",
+    "typescript": "^3.5.2",
+    "yargs": "^13.2.4"
+  }
+}

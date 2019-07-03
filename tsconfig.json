@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "baseUrl": "../src",
+        "outDir": "./build",
+        "rootDir": "./",
+        "sourceMap": true,
+        "allowJs": false,
+        "moduleResolution": "node",
+        "noImplicitAny": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "target": "es2017",
+        "module": "commonjs",
+        "plugins": [
+            {
+                "name": "typescript-tslint-plugin"
+            }
+        ]
+    },
+    "include": [
+        "./src/**/*",
+    ]
+}

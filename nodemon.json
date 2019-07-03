@@ -1,0 +1,7 @@
+{
+  "verbose": false,
+  "ignore": ["locales/pt.json", "logs/error.log", "logs/404.log", "sessions"],
+  "watch": [
+    "build/src/"
+  ]
+}

@@ -1,0 +1,1 @@
+declare function sha1(input: string): string;

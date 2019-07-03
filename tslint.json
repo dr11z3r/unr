@@ -1,0 +1,40 @@
+{
+    "extends": "tslint-config-airbnb",
+    "rules": {
+      "strict-boolean-expressions": [
+        true,
+        "allow-null-union",
+        "allow-undefined-union",
+        "allow-string",
+        "allow-number",
+        "ignore-rhs"
+      ],
+      "no-unused-variable": true,
+      "await-promise": [true, "Bluebird", "RequestPromise"],
+      "no-floating-promises": [true, "Bluebird"],
+      "no-return-await": true,
+      "no-use-before-declare": true,
+      "prefer-template": true,
+      "no-parameter-reassignment": false,
+      "no-duplicate-imports": true,
+      "no-boolean-literal-compare": true,
+      "no-this-assignment": false,
+      "linebreak-style":false,
+      "radix": false,
+      "no-multi-assign": false,
+      "no-console": false,
+      "no-bitwise": true,
+      "arrow-parens": false,
+      "import-name": false,
+      "ter-indent": false,
+      "variable-name": false,
+      "no-var-keyword": false,
+      "prefer-const": false,
+      "align": false,
+      "max-line-length": false,
+      "eofline": false,
+      "object-shorthand-properties-first": false,
+      "ter-arrow-parens": false,
+      "no-increment-decrement": false
+    }
+  }
