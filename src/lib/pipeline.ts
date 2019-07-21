@@ -100,14 +100,24 @@ export = class Pipeline {
         if (!ctx) ctx = {};
         if (!global.unr || !global.unr.commands) throw new Error('unr context not found.');
         var unrev = global.unr;
-        var result = null, hasError = false;
+        var result = null, hasError = false, pushResult = true;
         for (var i = 0; i < this.pipes.length; i++) {
             var pipe = this.pipes[i];
             if (pipe.cmd === '') continue;
+            if (!pipe.input && result != null) {
+                pipe.args.push(
+                    result
+                );
+            }
             if (!unrev.commands[pipe.args[0]]) {
                 hasError = true;
-                console.log(chalk.red('Command not found: %s'), pipe.args[0]);
-                break;
+                var globalFunc = (global as any)[pipe.args[0]];
+                if (globalFunc && typeof globalFunc === 'function') {
+                    pipe = new Pipe(`eval ${pipe.args[0]}.apply(unr, ${(global as any).encodeArg(JSON.stringify(pipe.args.slice(1).map(arg => arg)))})`, 1);
+                } else {
+                    console.log(chalk.red('Command not found: %s'), pipe.args[0]);
+                    break;
+                }
             }
             if (pipe.input && pipe.input.type === 4 && pipe.type === 3) {
                 pipe.args.push(
@@ -116,15 +126,12 @@ export = class Pipeline {
                     })()
                 );
             }
-            if (!pipe.input && result != null) {
-                pipe.args.push(
-                    result
-                );
-            }
             var kresult = unrev.runPipe(pipe);
             switch (pipe.type) {
                 case 0: result = null; break;
-                case 1: result = kresult; break;
+                case 1: 
+                    result = kresult;
+                break;
                 case 2:
                     result = null;
                     if (!pipe.input) {

@@ -13,7 +13,7 @@ export = class Pipe {
         this.cmd = typeof cmd === 'string' ? cmd : '';
         // 0 = don't pipe (&), 1 = pipe (|), 2 = redirect output to file (>), 3 = get input from file (<), 4 = file_ref (@)
         this.type = type;
-        this.yargs = yargs.parse(this.cmd);
+        this.yargs = yargs.help(false).parse(this.cmd);
         this.args = parseArgs(this.cmd);
     }
 }

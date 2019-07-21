@@ -1,6 +1,7 @@
 //@aliases alert
 
 function main(args) {
-    
-    sh('notify ' + encodeArg(args[0]));
+    if(process.platform === 'linux') {
+        sh('notify-send --urgency=low ' + encodeArg(args[0]));
+    }
 }

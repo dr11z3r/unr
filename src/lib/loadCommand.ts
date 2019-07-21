@@ -3,6 +3,8 @@ import fs = require('fs');
 import parseArgs = require('./parseArgs');
 import chalk from 'chalk';
 
+require('./stdlib');
+
 export = function (path: string) {
     let main;
     try {

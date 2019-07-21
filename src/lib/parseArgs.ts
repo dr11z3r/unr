@@ -1,32 +1,41 @@
-export = function (raw: string) {
-    var s = [], b = null, isInsideString = false;;
-    for (var i = 0; i < raw.length; i++) {
+function parseArgs(raw: string) {
+    var build = '', isInsideString = false, args = [], escapeNext = false;
+    for (var i=0;i<raw.length;i++) {
         var chr = raw[i];
-        if (isInsideString) {
-            if (chr === '"') {
-                if (b !== null) s.push(b);
-                b = null;
+        if (escapeNext) {
+            escapeNext = false;
+            build += chr;
+            continue;
+        }
+        if (chr === '\\') {
+            escapeNext = true;
+            continue;
+        }
+        if (chr === '"') {
+            if(isInsideString) {
+                args.push(build);
+                build = '';
                 isInsideString = false;
                 continue;
-            }
-            if (b === null) b = '';
-            b += chr;
-        } else {
-            if (chr === '"') {
-                if (b !== null) s.push(b);
-                b = null;
-                isInsideString = true;
             } else {
-                if (chr === ' ') {
-                    if (b !== null) s.push(b);
-                    b = null;
-                    continue;
+                if (build !== '') {
+                    args.push(build);
+                    build = '';
                 }
-                if (b === null) b = '';
-                b += chr;
+                isInsideString = true;
             }
+        } else if(chr === ' ') {
+            if(isInsideString) build += chr; else if (build !== '') {
+                args.push(build);
+                build = '';
+            }
+        } else {
+            build += chr;
         }
     }
-    if (b !== null) s.push(b);
-    return s;
+    if (build !== '') args.push(build);
+    if(isInsideString) throw new Error('unterminated "');
+    return args;
 }
+
+export = parseArgs;

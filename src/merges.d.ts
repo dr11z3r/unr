@@ -8,6 +8,9 @@ interface Iunr {
     inputFromFile: any;
     parseArgs: any;
     paths: string[];
+    getHistory: any;
+    addHistory: any;
+    updateHistory: any;
 }
 
 declare var unr: Iunr;
